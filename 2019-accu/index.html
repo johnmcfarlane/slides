@@ -1052,7 +1052,7 @@ auto t = m*m;</code></pre>
 namespace cnl {
    template&lt;int Digits, int Exponent>
    using elastic_number =
-         scaled_integer&lt;elastic_integer&lt;Digits>, power&lt;Exponent>>;
+       scaled_integer&lt;elastic_integer&lt;Digits>, power&lt;Exponent>>;
 
    namespace literals {
       template&lt;char ... Chars>
@@ -1066,7 +1066,7 @@ using namespace cnl::literals;
 // elastic_number<7, 3>
 constexpr auto k = 1000_elastic;</code></pre>
 
-                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/Ucm4lP">godbolt.org/z/Ucm4lP</a>
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/tBYdGE">godbolt.org/z/tBYdGE</a>
                 </section>
 
                 <section data-transition="fade-in fade-out">
@@ -1094,7 +1094,7 @@ auto m = k*k;
 
 // elastic_integer<40>{1000000000000LL}
 auto t = m*m;</code></pre>
-                    <a style="font-size: 75%" href="https://godbolt.org/z/hqJNlV">godbolt.org/z/hqJNlV</a>
+                    <a style="font-size: 75%" href="https://godbolt.org/z/WKEkRk">godbolt.org/z/WKEkRk</a>
                 </section>
 
                 <section data-transition="fade-in slide-out">
@@ -1122,7 +1122,7 @@ auto m = k*k;
 
 // elastic_number<28, 12>{1000000000000LL}
 auto t = m*m;</code></pre>
-                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/XVpklo">godbolt.org/z/XVpklo</a>
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/eRZs77">godbolt.org/z/eRZs77</a>
                 </section>
 
                 <section>
@@ -1175,7 +1175,7 @@ auto root32 = root2 * 4_elastic;</code></pre>
                         <br/>
                     </div>
 
-                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/m-eoDX">godbolt.org/z/m-eoDX</a>
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/tJHPtR">godbolt.org/z/tJHPtR</a>
                 </section>
 
                 <section>
@@ -1195,7 +1195,7 @@ auto root32 = root2 * 4_elastic;</code></pre>
     bx    lr</code></pre></div>
                     </div>
 
-                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/T9WKXW">godbolt.org/z/T9WKXW</a>
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/qSFyHN">godbolt.org/z/qSFyHN</a>
                 </section>
 
                 <section>
