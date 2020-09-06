@@ -1,0 +1,1289 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>The Secret Life of Numbers</title>
+
+        <link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/night.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+            <div class="slides">
+                <section>
+                    <h4>ACCU Autumn <code>2019</code></h4>
+                    <p>&nbsp;</p>
+                    <h2>The Secret Life of Numbers</h2>
+                    <p>&nbsp;</p>
+                    <p>John McFarlane</p>
+                    <a href="https://johnmcfarlane.github.io/slides/2019-accu">johnmcfarlane.github.io/slides/<code>2019</code>-accu</a>
+                </section>
+
+                <section>
+                    <h3>About Me</h3>
+                    <p>Software Engineer, Jaguar Land Rover, Shannon, Ireland</p>
+                    <p>BSI, MISRA C++, WG21 (SG14 & SG6)</p>
+                </section>
+
+                <section>
+                    <h3>Background</h3>
+                    <p>BBC BASIC, 6502, C, 80286/7, C++, Python</p>
+                    <p>Games, Fractals, AI, Simulation, APIs, Numerics, CI</p>
+                </section>
+
+                <section>
+                    <h3>Contents</h3>
+                    <ol>
+                        <li class="fragment">Bit Parts</li>
+                        <li class="fragment">Typology</li>
+                        <li class="fragment">Range-Based Four</li>
+                        <li class="fragment">Round Up</li>
+                    </ol>
+                </section>
+
+
+                <section>
+                    <h2>1. Bit Parts</h2>
+                    <div><code>…0.0…</code></div>
+                    <div><code>^</code></div>
+                </section>
+
+                <section>
+                    <h3>1.0. Acting Natural</h3>
+                    <div><code></code>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">how many <i>digits</i> in <code>uint8_t</code>?</span>
+                    </div>
+                    <div class="witw"><code></code>
+                        <span>Answer: </span>
+                    </div>
+                </section>
+
+                <section data-transition="slide-in none-out">
+                    <div><code>
+                        <span class="witw">…000000000</span><span>00101010</span>
+                        <span class="fragment"> = </span>
+                        <span class="fragment">32 + 8 + 2</span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade">
+                    <div><code>
+                        <span class="witw">…000000000</span><span>00101010</span>
+                        <span> = </span>
+                        <span>42</span>
+                        <span class="witw">000000…</span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade">
+                    <div><code>
+                        <span class="witw">…000000000000</span><span>00101010</span><span class="witw">.00000000000000…</span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade">
+                    <div><code>
+                        <span class="implicit">…000000000000</span><span>00101010</span><span class="fragment"><span class="implicit">.00000000000000…</span></span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <div><code>
+                        <span class="implicit">…000000000000</span>00<span class="significant">10101</span>0<span class="implicit">.00000000000000…</span>
+                    </code></div>
+                </section>
+
+                <section>
+                    <h3 class="witw">1.0. Act Natural</h3>
+                    <div><code></code>
+                        <span>Question: </span>
+                        <span>how many <i>digits</i> in <code>uint8_t</code>?</span>
+                    </div>
+                    <div><code></code>
+                        <span class="fragment">Answer: </span>
+                        <span class="fragment">∞</span><span class="fragment">+8</span><span class="fragment">+∞</span><span class="fragment"> = 2∞+8</span>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>1.1. Be Positive</h3>
+                    <div><code></code>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">how many <i>sign bits</i> in <code>int8_t</code>?</span>
+                    </div>
+                    <div class="witw"><code></code>
+                        <span>Answer: </span>
+                        <span>∞</span><span>+1</span>
+                    </div>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <div><code>
+                        <span class="witw">…11111111111</span><span>11010110</span>
+                        <span class="fragment"> = </span>
+                        <span class="fragment">-128+64+16+4+2</span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade">
+                    <div><code>
+                        <span class="witw">…11111111111</span><span>11010110</span>
+                        <span> = </span>
+                        <span>-42</span><span class="witw">0000000000…</span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade">
+                    <div><code>
+                        <span class="witw">…11111111111</span><span>11010110</span><span class="witw">.000000000000000…</span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade">
+                    <div><code>
+                        <span class="implicit">…11111111111</span>11010110<span class="witw">.000000000000000…</span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade">
+                    <div><code>
+                        <span class="implicit">…11111111111</span>11010110<span class="implicit">.000000000000000…</span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <div><code>
+                        <span class="implicit">…11111111111</span>1<span class="significant">101011</span>0<span class="implicit">.000000000000000…</span>
+                    </code></div>
+                </section>
+
+                <section>
+                    <h3 class="witw">1.1. Be Positive</h3>
+                    <div><code></code>
+                        <span>Question: </span>
+                        <span>how many <i>sign bits</i> in <code>int8_t</code>?</span>
+                    </div>
+                    <div><code></code>
+                        <span class="fragment">Answer: </span>
+                        <span class="fragment">∞</span><span class="fragment">+1</span>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>1.2. A Slice of Π</h3>
+                    <div>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">how many <i>significant digits</i> in <code>π</code>?</span>
+                    </div>
+                    <div class="witw">
+                        <span>Answer: </span><span>∞</span><span>+1</span><span>+2</span><span>+∞</span><span>=2∞+3</span>
+                    </div>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <div><code>
+                        <span class="witw">…00000</span><span>11.001001000011111101101010100…</span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade">
+                    <div><code>
+                        <span class="witw">…0000</span>011.001001000011111101101010100…
+                    </code></div>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <div><code>
+                        <span class="implicit">…0000</span><span>011.001001000011111101101010100…</span>
+                    </code></div>
+                </section>
+
+                <section>
+                    <h3 class="witw">1.2. A Slice of Π</h3>
+                    <div>
+                        <span>Question: </span>
+                        <span>how many <i>significant digits</i> in <code>π</code>?</span>
+                    </div>
+                    <div>
+                        <span class="fragment">Answer: </span>
+                        <span class="fragment">1</span>
+                        <span class="fragment">+2</span>
+                        <span class="fragment">+∞</span>
+                        <span class="fragment">=∞+3</span>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>1.3. Floatation Devices</h3>
+                    <div>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">how many <i>digits</i> in <code>float</code>?</span>
+                    </div>
+                    <div class="witw">
+                        <span>Answer: </span>
+                    </div>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <div><code>
+                        <span class="witw">…00000</span><span>11.001001000011111101101010100…</span>
+                    </code></div>
+                </section>
+
+                <section data-transition="fade">
+                    <div><code>
+                        <span class="implicit">…00000</span><span class="implicit"></span><span>11.0010010000111111011010</span><span class="implicit">10100…</span>
+                    </code></div>
+                </section>
+                <section data-transition="fade-in slide-out">
+                    <div><code>
+                        <span class="implicit">…000001</span><span class="implicit"></span><span>1.0010010000111111011010</span><span class="implicit">10100…</span>
+                    </code></div>
+                </section>
+
+                <section>
+                    <h3 class="witw">1.3. Floatation Devices</h3>
+                    <div>
+                        <span>Question: </span>
+                        <span>how many <i>digits</i> in <code>float</code>?</span>
+                    </div>
+                    <div>
+                        <span class="fragment">Answer: </span>
+                        <span class="fragment">24</span><span class="fragment">-1</span>
+                        <span class="fragment">= 23</span>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>1.4. Frame the Problem</h3>
+                    <div>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">how many times does 42 go into 8?</span>
+                    </div>
+                    <div class="witw"><code></code>
+                        <span>Answer:</span>
+                        <span>3</span>
+                    </div>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <div><code>
+                        <span>…00000000000101010.000000…</span>
+                    </code><span class="witw" style="font-size: 200%; display: contents">✓</span></div>
+                    <br/>
+                    <div class="witw"><code>
+                        <span class="implicit">…0000000000</span><span>010101</span><span class="implicit">0.000000…</span>
+                    </code><span class="witw" style="font-size: 200%; display: contents">✓</span></div>
+                    <div class="witw"><code>
+                        <span class="implicit">…0000000000</span><span>0101010</span>.<span>0</span><span class="implicit">00000…</span>
+                    </code><span class="witw" style="font-size: 200%; display: contents">✓</span></div>
+                    <div class="witw"><code>
+                        <span class="implicit">…00000000</span><span>00010101</span><span class="implicit">0.000000…</span>
+                    </code><span style="font-size: 200%; display: contents; color: green">✓</span></div>
+                </section>
+
+                <section data-transition="fade">
+                    <div><code>
+                        <span>…0000000000</span><span class="significant">010101</span><span>0.000000…</span>
+                    </code><span class="witw" style="font-size: 200%; display: contents">✓</span></div>
+                    <br/>
+                    <div class="witw"><code>
+                        <span class="implicit">…000000000</span>0<span class="significant">010101</span>0<span class="implicit">.000000…</span>
+                    </code><span class="witw" style="font-size: 200%; display: contents">✓</span></div>
+                    <div class="witw"><code>
+                        <span class="implicit">…0000000000</span><span class="significant">010101</span>0.<span>0</span><span class="implicit">00000…</span>
+                    </code><span class="witw" style="font-size: 200%; display: contents">✓</span></div>
+                    <div class="witw"><code>
+                        <span class="implicit">…00000000</span>00<span class="significant">010101</span><span class="implicit">0.000000…</span>
+                    </code><span style="font-size: 200%; display: contents; color: green">✓</span></div>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <div><code>
+                        <span>…0000000000</span><span class="significant">010101</span><span>0.000000…</span>
+                    </code><span class="witw" style="font-size: 200%; display: contents">✓</span></div>
+                    <br/>
+                    <div><code>
+                        <span class="implicit">…000000000</span>0<span class="significant">010101</span>0<span class="implicit">.000000…</span>
+                    </code><span class="witw" style="font-size: 200%; display: contents">✓</span></div>
+                    <div class="fragment"><code>
+                        <span class="implicit">…0000000000</span><span class="significant">010101</span>0.<span>0</span><span class="implicit">00000…</span>
+                    </code><span class="witw" style="font-size: 200%; display: contents">✓</span></div>
+                    <div class="fragment"><code>
+                        <span class="implicit">…00000000</span>00<span class="significant">010101</span><span class="implicit">0.000000…</span>
+                    </code><span class="fragment" style="font-size: 200%; display: contents; color: green">✓</span></div>
+                </section>
+
+                <section>
+                    <h3 class="witw">1.4. Frame the Problem</h3>
+                    <div>
+                        <span>Question: </span>
+                        <span>how many times does 42 go into 8?</span>
+                    </div>
+                    <div><code></code>
+                        <span class="fragment">Answer:</span>
+                        <span class="fragment">3</span>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>1.9.9 Warning</h3>
+                    <img width="192" height="192" data-src="fall-44484_960_720.png" alt="pixabay.com/en/fall-surface-warning-slippery-44484/" style="border: none; box-shadow:none; background-color: #00000000">
+                    <h4>Slide Code Ahead!</h4>
+                    <pre><code class="sh">git clone https://github.com/johnmcfarlane/cnl.git
+c++ -std=c++17 -Wall -Wextra -Werror -Wpedantic slide_code.cpp</code></pre>
+                    <pre><code class="c++">#include &lt;cnl/all.h>
+#include &lt;cnl/_impl/type_traits/identical.h>
+using namespace cnl;
+using namespace cnl::literals;
+using namespace cnl::math;
+using namespace std;</code></pre>
+                </section>
+
+
+                <section data-transition="slide-in slide-out">
+                    <h2>2. Typology</h2>
+                    <div><code>&lt;O,0></code></div>
+                    <div><code>-</code></div>
+                </section>
+
+                <section>
+                    <h3>2.0. Don't Sell Yourself Short</h3>
+                    <div><code></code>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">how do you <em>write</em> 'forty-two'?</span>
+                    </div>
+                    <div class="witw"><code></code>
+                        <span>Answer:</span>
+                        <span><code class="c++">scaled_integer{42_c}</code></span>
+                    </div>
+                </section>
+
+                <section>
+                    <h4>CNL: Compositional Numeric Library</h4>
+                    <p class="fragment"><a href="https://github.com/johnmcfarlane/cnl/">
+                        github.com/johnmcfarlane/cnl
+                    </a></p>
+                    <pre class="fragment"><code class="c++">template&lt;int Exponent=0, int Radix=2>
+class power;</code></pre>
+                    <pre class="fragment"><code class="c++">template&lt;typename Rep=int, typename Scale=power&lt;>>
+class scaled_integer;</code></pre>
+                    <pre class="fragment"><code class="c++">template&lt;typename Rep, int Exponent, int Radix>
+class scaled_integer&lt;Rep, power&lt;Exponent, Radix>> {
+  // ...
+private:
+  Rep n;
+};</code></pre>
+                    <p class="fragment"><i>value</i> = <i>n</i>×<i>Radix</i><sup><i>Exponent</i></sup></p>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <div>
+                        <code><span class="implicit">…0000000000</span><span>010101</span><span
+                                class="implicit">0.000000…
+						</span></code>
+                        <span style="font-size: 150%; display: contents; color: #00000000">✓</span>
+                    </div>
+
+                    <div class="fragment" style="display: flex; box-shadow:none">
+                        <pre style="flex: 85%"><code class="c++">int8_t{42}</code></pre>
+                        <div style="flex: 05%"><span class="fragment" style="font-size: 150%; color: red">✗</span></div>
+                    </div>
+
+                    <div class="fragment" style="display: flex">
+                        <pre style="flex: 85%"><code class="c++">scaled_integer&lt;int8_t, power&lt;1>>{42}</code></pre>
+                        <div style="flex: 05%"><span class="fragment" style="font-size: 150%">?</span></div>
+                    </div>
+
+                    <div class="witw" style="display: flex">
+                        <pre style="flex: 85%"><code class="c++">scaled_integer&lt;int, power&lt;1>>{42}</code></pre>
+                        <div style="flex: 05%"><span style="font-size: 150%; color: green">✓</span></div>
+                    </div>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <div style="display: flex">
+                        <div style="flex: 61%"><pre><code class="c++">scaled_integer&lt;int8_t, power&lt;1>>
+a(float value)
+{
+    return value;
+}</code></pre></div>
+                        <div style="flex: 39%"><pre><code class="arm" data-trim contenteditable>a(float):
+  push  {r4, lr}
+  mov   r1, #1056964608
+  bl    __aeabi_fmul
+  bl    __aeabi_f2iz
+  pop   {r4, pc}</code></pre></div>
+                    </div>
+
+                    <div class="fragment" style="display: flex">
+                        <div style="flex: 61%"><pre><code class="c++">int8_t b(float value)
+{
+    return value * .5f;
+}</code></pre></div>
+                        <div style="flex: 39%"><pre><code class="arm" data-trim contenteditable>b(float):
+  push  {r4, lr}
+  mov   r1, #1056964608
+  bl    __aeabi_fmul
+  bl    __aeabi_f2iz
+  lsl   r0, r0, #24
+  asr   r0, r0, #24
+  pop   {r4, pc}</code></pre></div>
+                    </div>
+
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/C3rVEh">godbolt.org/z/C3rVEh</a>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <div style="display: flex">
+                        <div style="flex: 61%"><pre><code class="c++">scaled_integer&lt;int   , power<1>>
+a(float value)
+{
+    return value;
+}</code></pre></div>
+                        <div style="flex: 39%"><pre><code class="arm" data-trim contenteditable>a(float):
+  push  {r4, lr}
+  mov   r1, #1056964608
+  bl    __aeabi_fmul
+  bl    __aeabi_f2iz
+  pop   {r4, pc}</code></pre></div>
+                    </div>
+
+                    <div style="display: flex">
+                        <div style="flex: 61%"><pre><code class="c++">int    b(float value)
+{
+    return value * .5f;
+}</code></pre></div>
+                        <div style="flex: 39%"><pre><code class="arm" data-trim contenteditable>b(float):
+  push  {r4, lr}
+  mov   r1, #1056964608
+  bl    __aeabi_fmul
+  bl    __aeabi_f2iz
+
+
+  pop   {r4, pc}</code></pre></div>
+                    </div>
+
+                    <a style="font-size: 75%" href="https://godbolt.org/z/FKugVN">godbolt.org/z/FKugVN</a>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <div>
+                        <code><span class="implicit">…00000000</span><span>00010101</span><span
+                                class="implicit">0.000000…
+						</span></code>
+                        <span style="font-size: 150%; display: contents; color: #00000000">✓</span>
+                    </div>
+
+                    <div style="display: flex; box-shadow:none">
+                        <pre style="flex: 85%"><code class="c++">int8_t{42}</code></pre>
+                        <div style="flex: 05%"><span style="font-size: 150%; color: red">✗</span></div>
+                    </div>
+
+                    <div style="display: flex">
+                        <pre style="flex: 85%"><code class="c++">scaled_integer&lt;int8_t, power&lt;1>>{42}</code></pre>
+                        <div style="flex: 05%"><span class="fragment" style="font-size: 150%; color: red">✗</span></div>
+                    </div>
+
+                    <div style="display: flex">
+                        <pre class="fragment" style="flex: 85%"><code class="c++">scaled_integer&lt;int, power&lt;1>>{42}</code></pre>
+                        <div style="flex: 05%"><span class="fragment" style="font-size: 150%">?</span></div>
+                    </div>
+                </section>
+
+                <section>
+                    <pre><code class="c++">namespace cnl::literals {
+    template&lt;char ... Chars>
+    constexpr auto operator ""_c() noexcept;
+}</code></pre>
+                    <pre class="fragment"><code class="c++">// constant&lt;42>
+auto forty_two = 42_c;
+
+// scaled_integer&lt;int, power&lt;1>>{42}
+auto a = scaled_integer{forty_two};
+</code></pre>
+
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/x6PbFK">godbolt.org/z/x6PbFK</a>
+                </section>
+
+                <section style="font-size: 150%">
+                    <div style="display: flex">
+                        <pre style="flex: 82%; box-shadow:none"><code class="c++">int8_t{42}</code></pre>
+                        <div style="flex: 18%"><img style="background-color: #00000000;" src="small.jpg" alt="small brain (meme)"></div>
+                    </div>
+
+                    <div style="display: flex" class="fragment">
+                        <pre style="flex: 82%; box-shadow:none"><code class="c++">scaled_integer&lt;int8_t, power&lt;1>>{42}</code></pre>
+                        <div style="flex: 18%"><img style="flex: 10%; background-color: #00000000;" src="medium.jpg" alt="medium brain (meme)"></div>
+                    </div>
+
+                    <div style="display: flex" class="fragment">
+                        <pre style="flex: 82%; box-shadow:none"><code class="c++">scaled_integer&lt;int, power&lt;1>>{42}</code></pre>
+                        <div style="flex: 18%"><img style="flex: 10%; background-color: #00000000;" src="big.jpg" alt="big brain (meme)"></div>
+                    </div>
+
+                    <div style="display: flex" class="fragment">
+                        <pre style="flex: 82%; box-shadow:none"><code class="c++">scaled_integer{42_c}</code></pre>
+                        <div style="flex: 18%"><img style="flex: 10%; background-color: #00000000;" src="huge.jpg" alt="huge brain (meme)"></div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="witw">2.0. Don't Sell Yourself Short</h3>
+                    <div>
+                        <span>Question: </span>
+                        <span>how do you <em>write</em> 'forty-two'?</span>
+                    </div>
+                    <div><code></code>
+                        <span class="fragment">Answer:</span>
+                        <span class="fragment"><code class="c++">scaled_integer{42_c}</code></span>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>2.1. All Your Base</h3>
+                    <div><code></code>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">how many bits in a megabyte?</span>
+                    </div>
+
+                    <div class="witw"><code></code>
+                        <span>Answer:</span>
+                    </div>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <div>
+                        <code><span>1M</span></code>
+                    </div>
+                    <div>
+                        <code><span class="fragment">1000</span><span class="fragment">×</span><span class="fragment">1000</span></code>
+                    </div>
+                    <div class="fragment">
+                        <code><span>1111101000</span><span class="fragment">×</span><span class="fragment">1111101000</span></code>
+                    </div>
+                    <div class="witw">
+                        <code><span>=11110100001001000000</span></code>
+                    </div>
+                </section>
+
+                <section data-transition="fade">
+                    <div class="witw">
+                        <code><span>1M</span></code>
+                    </div>
+                    <div class="witw">
+                        <code><span>1000</span><span>×</span><span>1000</span></code>
+                    </div>
+                    <div>
+                        <code><span>1111101000</span><span>×</span><span>1111101000</span></code>
+                    </div>
+                    <div class="fragment">
+                        <code><span>=11110100001001000000</span></code>
+                    </div>
+                </section>
+
+                <section data-transition="fade">
+                    <div class="witw">
+                        <code><span>1M</span></code>
+                    </div>
+                    <div class="witw">
+                        <code><span>1000</span><span>×</span><span>1000</span></code>
+                    </div>
+                    <div>
+                        <code><span>1111101</span><span class="implicit">000×</span><span>1111101</span><span class="implicit">000</span></code>
+                    </div>
+                    <div>
+                        <code><span>=11110100001001</span><span class="implicit">000000</span></code>
+                    </div>
+                </section>
+
+                <section data-transition="fade">
+                    <div class="witw">
+                        <code><span>1M</span></code>
+                    </div>
+                    <div class="witw">
+                        <code><span>1000</span><span>×</span><span>1000</span></code>
+                    </div>
+                    <div>
+                        <code><span class="implicit">1111101</span><span>000</span><span class="implicit">×1111101</span><span>000</span></code>
+                    </div>
+                    <div>
+                        <code><span class="implicit">=11110100001001</span><span>000000</span></code>
+                    </div>
+                </section>
+
+                <section>
+                    <pre><code class="c++">// scaled_integer&lt;int, power&lt;3>>{1000}
+auto k = scaled_integer{1000_c};
+
+// scaled_integer&lt;int, power&lt;6>>{1000000}
+auto m = k*k;</code></pre>
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/xWwhNz">godbolt.org/z/xWwhNz</a>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <h3 class="witw">2.1. All Your Base</h3>
+                    <div>
+                        <span>Question: </span>
+                        <span>how many bits in a megabyte?</span>
+                    </div>
+
+                    <div>
+                        <span class="fragment">Answer:</span>
+                        <span class="fragment">7</span><span class="fragment">+</span><span class="fragment">7</span><span class="fragment">=14</span>
+                    </div>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <h3 class="witw">2.1. All Your Base</h3>
+                    <div>
+                        <span>Question: </span>
+                        <span>how many bits in a megabyte?</span>
+                    </div>
+
+                    <div>
+                        <span>Answer: </span><del>7+7=14</del>
+                    </div>
+                </section>
+
+                <section data-transition="fade">
+                    <div>
+                        <code><span>1M</span></code>
+                    </div>
+                    <div>
+                        <code><span class="fragment">1000</span><span class="fragment">×</span><span class="fragment">1000</span></code>
+                    </div>
+                    <div>
+                        <code><span class="fragment">=1000000</span></code>
+                    </div>
+                </section>
+
+                <section data-transition="fade">
+                    <div class="witw">
+                        <code><span>1M</span></code>
+                    </div>
+                    <div>
+                        <code>1<span class="implicit">000×</span>1<span class="implicit">000</span></code>
+                    </div>
+                    <div>
+                        <code><span class="implicit">=</span>1<span class="implicit">000000</span></code>
+                    </div>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <div class="witw">
+                        <code><span>1M</span></code>
+                    </div>
+                    <div>
+                        <code><span class="implicit">1</span>000<span class="implicit">×1</span>000</span></code>
+                    </div>
+                    <div>
+                        <code><span class="implicit">=1</span>000000</code>
+                    </div>
+                </section>
+
+                <section>
+                    <pre><code class="c++">// scaled_integer&lt;int, power<3, 10>>{1000}
+auto k = scaled_integer&lt;int, power<3, 10>>{1000};
+
+// scaled_integer&lt;int, power<6, 10>>{1000000}
+auto m = k*k;</code></pre>
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/zzg7BC">godbolt.org/z/zzg7BC</a>
+                </section>
+
+                <section>
+                    <h3 class="witw">2.1. All Your Base</h3>
+                    <div>
+                        <span>Question: </span>
+                        <span>how many bits in a megabyte?</span>
+                    </div>
+
+                    <div>
+                        <span class="fragment">Answer:</span>
+                        <span class="fragment">1</span>
+                    </div>
+                </section>
+
+
+                <section>
+                    <h3>2.2. Root Planning</h3>
+                    <div><code></code>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">how far does the queen really move in Chess?</span>
+                    </div>
+
+                    <div class="witw">
+                        <span>Answer:</span>
+                    </div>
+
+                    <a class="witw" style="font-size: 75%" href="https://wandbox.org/permlink/GBY1czkvkZ8jytlS">wandbox.org/permlink/GBY1czkvkZ8jytlS</a>
+                </section>
+
+                <section>
+                    <img width="384" height="384" src="queen_1.gif" alt="directions a queen can move in chess">
+
+                    <img width="384" height="384" src="Square_root_of_2_triangle.png" alt="illustration of root two as a diagonal"/>
+                </section>
+
+                <section>
+                    <div><code style="font-size: 75%">1.414213562373095048801688724209698078569671875…</code></div>
+                    <div class="fragment"><code style="font-size: 75%"><span class="implicit">…0</span>01.011010100000100111100110011001<span class="implicit">11111100111011…</span></code></div>
+                    <div class="fragment"><code style="font-size: 75%" class="c++">sqrt2_v&lt;scaled_integer&lt;int, power&lt;-30>>></code></div>
+                </section>
+
+                <section>
+                    <img width="384" height="384" data-src="queens_distance.jpg" alt="source: chess-poster.com">
+                    <p class="witw">(5.8284270763397216796875)</p>
+                    <a class="witw" style="font-size: 75%" href="https://wandbox.org/permlink/GBY1czkvkZ8jytlS">wandbox.org/permlink/GBY1czkvkZ8jytlS</a>
+                </section>
+
+                <section>
+                    <div style="display: flex; font-size: 70%">
+                        <div style="flex: 58%"><pre><code class="c++">using Distance = scaled_integer&lt;int, power&lt;-24>>;
+
+Distance queens_distance(int columns, int rows)
+{
+    columns = std::abs(columns);
+    rows = std::abs(rows);
+    int diagonal = std::min(columns, rows);
+    int axial = std::max(columns, rows)-diagonal;
+    return sqrt2_v&lt;Distance>*diagonal+axial;
+}</code></pre>
+                            <a style="font-size: 75%" href="https://godbolt.org/z/9xcJWK">godbolt.org/z/9xcJWK</a>
+                        </div>
+                        <div style="flex: 42%"><pre><code class="arm" data-trim contenteditable>queens_distance(int, int):
+        cmp     r0, #0
+        rsblt   r0, r0, #0
+        cmp     r1, #0
+        rsblt   r1, r1, #0
+        cmp     r0, r1
+        movlt   ip, r0
+        movge   ip, r1
+        cmp     r0, r1
+        rsbge   r0, ip, r0
+        rsblt   r0, ip, r1
+        ldr     r2, .L3
+        mul     r3, r2, ip
+        add     r0, r3, r0, lsl #24
+        bx      lr
+.L3:
+        .word   23726566</code></pre></div>
+                    </div>
+                </section>
+
+                <section data-background="queens_distance.jpg" data-background-size="1100px">
+                    <div style="color:#EEE; text-shadow:1px 2px 0 #000, -1px 2px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;">
+                        <h3 class="witw"><br/>2.2. Root Planning</h3>
+                        <div><code></code>
+                            <span>Question: </span>
+                            <span>how far does the queen really move in Chess?</span>
+                        </div>
+                        <div>
+                            <span class="fragment">Answer:</span>
+                            <span class="fragment">5.8284270763397216796875</span>
+                        </div>
+                        <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/2f3KjT">godbolt.org/z/2f3KjT</a>
+                    </div>
+                </section>
+
+
+                <section>
+                    <h2>3. Range-Based Four</h2>
+                    <div><code>(0/0)</code></div>
+                    <div><code>  o  </code></div>
+                </section>
+
+                <section>
+                    <h3>3.0. Prescriptive</h3>
+                    <div>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">what if I run out of bits?</span>
+                    </div>
+                    <div class="witw">
+                        <span>Answer: </span>
+                        <span>don't.</span>
+                    </div>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <div>
+                        <code style="font-size: 75%">…00001.0110101000001001111001100110011111110…</code>
+                    </div>
+                    <br/>
+
+                    <pre class="fragment"><code class="c++">          auto root2 = sqrt2_v&lt;scaled_integer&lt;int, power&lt;-30>>>;</code></pre>
+                    <div class="fragment">
+                        <code style="font-size: 75%"><span class="implicit">…000</span>01.011010100000100111100110011001<span class="fragment" style="color:orange">0000000…</span></code>
+                    </div>
+                    <br/>
+
+                    <pre class="fragment"><code class="c++">          auto root32 = root2 * 4;</code></pre>
+                    <div class="fragment" style="position:relative;">
+                        <div>
+                            <code style="font-size: 75%"><span class="implicit">…0</span><span style="color:red">01</span>01.101010000010011110011001100100<span class="implicit">0000000…</span></code>
+                        </div>
+                        <div class="witw" style="position:absolute; top:0; text-align: left;">
+                            <pre><code class="nohighlight">&lt;source>:10:39: error: overflow in constant expression [-fpermissive]         &nbsp;
+constexpr auto root32 = root2 * 4;
+                                  ^</code></pre>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/FcU6DR">godbolt.org/z/FcU6DR</a>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <div>
+                        <code style="font-size: 75%">…00001.0110101000001001111001100110011111110…</code>
+                    </div>
+                    <br/>
+
+                    <pre><code class="c++">constexpr auto root2 = sqrt2_v&lt;scaled_integer&lt;int, power&lt;-30>>>;</code></pre>
+                    <div>
+                        <code style="font-size: 75%"><span class="implicit">…000</span>01.011010100000100111100110011001<span class="implicit imprecise">0000000…</span></code>
+                    </div>
+                    <br/>
+
+                    <pre><code class="c++">constexpr auto root32 = root2 * 4;</code></pre>
+                    <div style="position:relative;">
+                        <div class="witw">
+                            <code style="font-size: 75%"><span class="implicit">…0</span><span style="color:red">1</span>01.101010000010011110011001100100<span class="implicit">0000000…</span></code>
+                        </div>
+                        <div style="position:absolute; top:0; font-size: 85%">
+                            <pre><code class="nohighlight">&lt;source>:8:33: error: overflow in constant expression [-fpermissive]
+ constexpr auto root32 = root2 * 4;
+                                 ^</code></pre>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <a style="font-size: 75%" href="https://godbolt.org/z/nhsEaK">godbolt.org/z/nhsEaK</a>
+                </section>
+
+                <section>
+                    <pre><code class="bash">c++ -std=c++17
+&nbsp;   -Wall -Wextra -Werror
+&nbsp;   -fsanitize=address,undefined
+    all_your_source_files.cpp</code></pre>
+                    <pre class="fragment"><code class="c++">auto root2 = sqrt2_v&lt;scaled_integer&lt;int, power&lt;-30>>>;
+auto root32 = root2 * 4;</code></pre>
+                    <pre class="fragment"><code class="nohighlight">cnl.h:2903:51: runtime error: signed integer overflow:
+1518500249 * 4 cannot be represented in type 'int'</code></pre>
+                    <a class="fragment" style="font-size: 75%" href="https://wandbox.org/permlink/womtuT7zYstKiLhK">wandbox.org/permlink/womtuT7zYstKiLhK</a>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <pre style="font-size: 75%"><code class="c++">unsigned mu = 0;
+cout &lt;&lt; (mu-1);</code></pre>
+                    <p class="fragment range_error_result"><code>4294967295</code></p>
+
+                    <pre style="font-size: 75%" class="fragment"><code class="c++">int s = 1;
+cout &lt;&lt; (s &lt;&lt; 31);</code></pre>
+                    <p class="fragment range_error_result"><code>-2147483648</code></p>
+
+                    <pre style="font-size: 75%" class="fragment"><code class="c++">int ms = 100000;
+cout &lt;&lt; short(ms);</code></pre>
+                    <p class="fragment range_error_result"><code>-31072</code></p>
+
+                    <br/>
+                    <a class="fragment" style="font-size: 75%" href="https://wandbox.org/permlink/yKUMQNIRr9XZMVBU">wandbox.org/permlink/yKUMQNIRr9XZMVBU</a>
+                </section>
+
+                <section>
+                    <div style="position:relative;">
+                        <div>
+                            <pre><code class="c++">// cnl/overflow_integer.h
+namespace cnl {
+   template&lt;
+      typename Rep,
+      class OverflowTag=undefined_overflow_tag>
+   class overflow_integer;
+}</code></pre>
+                        </div>
+                        <div class="witw" style="position:absolute; top:0">
+                            <pre style="font-size: 75%"><code class="c++">overflow_integer&lt;unsigned> mu = 0;
+cout &lt;&lt; (mu-1);</code></pre>
+                            <p class="range_error_result"><code>runtime error: execution reached an unreachable program point</code></p>
+
+                            <pre style="font-size: 75%"><code class="c++">overflow_integer&lt;int> s = 1;
+cout &lt;&lt; (s&lt;&lt;31);</code></pre>
+                            <p class="range_error_result"><code>runtime error: execution reached an unreachable program point</code></p>
+
+                            <pre style="font-size: 75%"><code class="c++">overflow_integer&lt;int> ms = 100000;
+cout &lt;&lt; short(ms);</code></pre>
+                            <p class="range_error_result"><code>runtime error: execution reached an unreachable program point</code></p>
+
+                            <br/>
+                            <a style="font-size: 75%" href="https://wandbox.org/permlink/7Mgbgw3AKcYeJzw0">wandbox.org/permlink/7Mgbgw3AKcYeJzw0</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <div style="position:relative;">
+                        <div class="witw">
+                            <pre><code class="c++">// cnl/overflow_integer.h
+namespace cnl {
+   template&lt;typename Rep, class OverflowTag=undefined_overflow_tag>
+   class overflow_integer;
+}</code></pre>
+                        </div>
+                        <div style="position:absolute; top:0">
+                            <pre style="font-size: 75%"><code class="c++">overflow_integer&lt;unsigned> mu = 0;
+cout &lt;&lt; (mu-1);</code></pre>
+                            <p class="fragment range_error_result"><code>runtime error: execution reached an unreachable program point</code></p>
+
+                            <pre class="fragment" style="font-size: 75%"><code class="c++">overflow_integer&lt;int> s = 1;
+cout &lt;&lt; (s&lt;&lt;31);</code></pre>
+                            <p class="fragment range_error_result"><code>runtime error: execution reached an unreachable program point</code></p>
+
+                            <pre class="fragment" style="font-size: 75%"><code class="c++">overflow_integer&lt;int> ms = 100000;
+cout &lt;&lt; short(ms);</code></pre>
+                            <p class="fragment range_error_result"><code>runtime error: execution reached an unreachable program point</code></p>
+
+                            <br/>
+                            <a class="fragment" style="font-size: 75%" href="https://wandbox.org/permlink/7Mgbgw3AKcYeJzw0">wandbox.org/permlink/7Mgbgw3AKcYeJzw0</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="witw">3.0. Prescriptive</h3>
+                    <div>
+                        <span>Question: </span>
+                        <span>what if I run out of bits?</span>
+                    </div>
+                    <div>
+                        <span class="fragment">Answer: </span>
+                        <span class="fragment">don't.</span>
+                    </div>
+                </section>
+
+
+                <section>
+                    <h3>3.1. Descriptive Range</h3>
+                    <div>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">what if your numbers grow?</span>
+                    </div>
+                    <div class="witw">
+                        <span>Answer: </span>
+                        <span>stretch!</span>
+                    </div>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <pre><code class="c++">// cnl/elastic_integer.h
+namespace cnl {
+   template&lt;int Digits, typename Narrowest=int>
+   class elastic_integer;
+}</code></pre>
+                    <div style="font-size: 75%">
+                        <div class="fragment">
+                            <code>1111101000<span class="implicit"><sup>4</sup></span></code>
+                        </div>
+                        <div class="fragment">
+                            <code><span class="implicit">=</span>11110100001001000000<sup class="implicit">2</sup></code>
+                        </div>
+                        <div class="fragment">
+                            <code><span class="implicit">=</span>1110100011010100101001010001000000000000<sup></sup></code>
+                        </div>
+                    </div>
+                    <pre class="fragment"><code class="c++">// elastic_integer&lt;10>{1000}
+auto k = elastic_integer{1000_c};
+
+// elastic_integer&lt;20>{1000000}
+auto m = k*k;
+
+// elastic_integer<40>{1000000000000LL}
+auto t = m*m;</code></pre>
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/WKEkRk">godbolt.org/z/WKEkRk</a>
+                </section>
+
+                <section data-transition="fade">
+                    <pre><code class="c++">// cnl/elastic_integer.h
+namespace cnl {
+   template&lt;int Digits, typename Narrowest=int>
+   class elastic_integer;
+}</code></pre>
+                    <div style="font-size: 75%">
+                        <div>
+                            <code><span class="implicit">1111101</span><span>000</span><sup class="implicit">4</sup></code>
+                        </div>
+                        <div>
+                            <code><span class="implicit">=11110100001001</span><span>000000<sup class="implicit">2</sup></span></code>
+                        </div>
+                        <div>
+                            <code><span class="implicit">=1110100011010100101001010001</span><span>000000000000</span><sup></sup></code>
+                        </div>
+                    </div>
+                    <pre><code class="c++">// elastic_integer&lt;10>{1000}
+auto k = elastic_integer{1000_c};
+
+// elastic_integer&lt;20>{1000000}
+auto m = k*k;
+
+// elastic_integer<40>{1000000000000LL}
+auto t = m*m;</code></pre>
+                    <a style="font-size: 75%" href="https://godbolt.org/z/WKEkRk">godbolt.org/z/WKEkRk</a>
+                </section>
+
+                <section>
+                    <pre><code class="c++">// cnl/elastic_number.h
+namespace cnl {
+   template&lt;int Digits, int Exponent>
+   using elastic_number =
+       scaled_integer&lt;elastic_integer&lt;Digits>, power&lt;Exponent>>;
+
+   namespace literals {
+      template&lt;char ... Chars>
+      constexpr auto operator ""_elastic() noexcept;
+   }
+}</code></pre>
+
+                    <pre class="fragment"><code class="c++">// user code
+using namespace cnl::literals;
+
+// elastic_number<7, 3>
+constexpr auto k = 1000_elastic;</code></pre>
+
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/tBYdGE">godbolt.org/z/tBYdGE</a>
+                </section>
+
+                <section data-transition="fade-in fade-out">
+                    <pre><code class="c++">// cnl/elastic_integer.h
+namespace cnl {
+   template&lt;int Digits, typename Narrowest=int>
+   class elastic_integer;
+}</code></pre>
+                    <div style="font-size: 75%">
+                        <div>
+                            <code>1111101000<span class="implicit"><sup>4</sup></span></code>
+                        </div>
+                        <div>
+                            <code><span class="implicit">=</span>11110100001001000000<sup class="implicit">2</sup></code>
+                        </div>
+                        <div>
+                            <code><span class="implicit">=</span>1110100011010100101001010001000000000000<sup></sup></code>
+                        </div>
+                    </div>
+                    <pre><code class="c++">// elastic_integer<10>{1000}
+auto k = elastic_integer{1000_c};
+
+// elastic_integer<20>{1000000}
+auto m = k*k;
+
+// elastic_integer<40>{1000000000000LL}
+auto t = m*m;</code></pre>
+                    <a style="font-size: 75%" href="https://godbolt.org/z/WKEkRk">godbolt.org/z/WKEkRk</a>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <pre><code class="c++">// cnl/elastic_number.h
+namespace cnl {
+   template&lt;int Digits, int Exponent>
+   using elastic_number = ...;
+}</code></pre>
+                    <div style="font-size: 75%">
+                        <div>
+                            <code><span>1111101</span><span class="implicit">000<sup>4</sup></span></code>
+                        </div>
+                        <div>
+                            <code><span class="implicit">=</span>11110100001001<span class="implicit">000000<sup>2</sup></span></code>
+                        </div>
+                        <div>
+                            <code><span class="implicit">=</span>1110100011010100101001010001<span class="implicit">000000000000</span><sup></sup></code>
+                        </div>
+                    </div>
+                    <pre><code class="c++">// elastic_number<7, 3>{1000}
+auto k = 1000_elastic;
+
+// elastic_number<14, 6>{1000000}
+auto m = k*k;
+
+// elastic_number<28, 12>{1000000000000LL}
+auto t = m*m;</code></pre>
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/eRZs77">godbolt.org/z/eRZs77</a>
+                </section>
+
+                <section>
+                    <h3 class="witw">3.1. Descriptive Range</h3>
+                    <div>
+                        <span>Question: </span>
+                        <span>what if your numbers grow?</span>
+                    </div>
+                    <div>
+                        <span class="fragment">Answer: </span>
+                        <span class="fragment">stretch!</span>
+                    </div>
+                </section>
+
+
+                <section>
+                    <h3>3.2. Adaptive Range</h3>
+                    <div>
+                        <span class="fragment">Question: </span>
+                        <span class="fragment">can't stretch / won't stretch?</span>
+                    </div>
+                    <div class="witw">
+                        <span>Answer: </span>
+                        <span>don't stretch.</span>
+                    </div>
+                </section>
+
+                <section>
+                    <pre><code class="c++">auto root2 = sqrt2_v&lt;scaled_integer&lt;int, power&lt;-30>>>;</code></pre>
+                    <div>
+                        <code style="font-size: 75%"><span class="implicit">…000</span>01.011010100000100111100110011001<span class="implicit">0000000…</span></code>
+                    </div>
+                    <br/>
+
+                    <div class="fragment">
+                        <pre><code class="c++">// scaled_integer&lt;int, power&lt;-28>>
+auto root32 = root2 &lt;&lt; 2_c;</code></pre>
+                        <div style="position:relative;">
+                            <code style="font-size: 75%"><span class="implicit">…000</span>0101.1010100000100111100110011001<span class="implicit">0000000…</span></code>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <div class="fragment">
+                        <pre><code class="c++">// elastic_number&lt;31, -28>
+auto root32 = root2 * 4_elastic;</code></pre>
+                        <div style="position:relative;">
+                            <code style="font-size: 75%"><span class="implicit">…000</span>0101.1010100000100111100110011001<span class="implicit">0000000…</span></code>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/tJHPtR">godbolt.org/z/tJHPtR</a>
+                </section>
+
+                <section>
+                    <div style="display: flex">
+                        <div style="flex: 69%"><pre><code class="c++">auto f(scaled_integer&lt;int, power&lt;-30>> n) {
+    return n &lt;&lt; 2_c;
+}</code></pre></div>
+                        <div class="fragment" style="flex: 31%"><pre><code class="arm" data-trim contenteditable>f:
+    bx    lr</code></pre></div>
+                    </div>
+
+                    <div style="display: flex">
+                        <div class="fragment" style="flex: 69%"><pre><code class="c++">auto g(scaled_integer&lt;int, power&lt;-30>> n) {
+    return n * 4_elastic;
+}</code></pre></div>
+                        <div class="fragment" style="flex: 31%"><pre><code class="arm" data-trim contenteditable>g:
+    bx    lr</code></pre></div>
+                    </div>
+
+                    <a class="fragment" style="font-size: 75%" href="https://godbolt.org/z/qSFyHN">godbolt.org/z/qSFyHN</a>
+                </section>
+
+                <section>
+                    <h3 class="witw">3.2. Adaptive Range</h3>
+                    <div>
+                        <span>Question: </span>
+                        <span>can't stretch / won't stretch?</span>
+                    </div>
+                    <div>
+                        <span class="fragment">Answer: </span>
+                        <span class="fragment">don't stretch.</span>
+                    </div>
+                </section>
+
+
+                <section>
+                    <h2>4. Round Up</h2>
+                </section>
+
+                <section>
+                    <h3>4.0. Conclusion</h3>
+
+                    <ul style="font-size: 75%">
+                        <li class="fragment"><code></code>
+                            <span>2∞+8</span>
+                        </li>
+                        <li class="fragment"><code></code>
+                            <span>∞</span><span>+1</span>
+                        </li>
+                        <li class="fragment">
+                            <span>∞+3</span>
+                        </li>
+                        <li class="fragment">
+                            <span>2∞+24</span>
+                        </li>
+                        <li class="fragment"><code></code>
+                            <span>3</span>
+                        </li>
+                        <li class="fragment"><code></code>
+                            <span><code class="c++">scaled_integer{42_c}</code></span>
+                        </li>
+                        <li class="fragment">
+                            <del>14</del> 1</span>
+                        </li>
+                        <li class="fragment">
+                            <span>5.8284270763397216796875</span>
+                        </li>
+                        <li class="fragment">
+                            <span>don't.</span>
+                        </li>
+                        <li class="fragment">
+                            <span>stretch!</span>
+                        </li>
+                        <li class="fragment">
+                            <span>don't stretch.</span>
+                        </li>
+                    </ul>
+
+                </section>
+
+                <section>
+                    <h3>4.1. Thank You</h3>
+                    <div>Questions: ?</div>
+                    <div class="witw">Answers:</div>
+                    <div style="font-size: 75%">
+                        <p>@JSAMcFarlane</p>
+                        <p><a href="mailto:fixed-point@john.mcfarlane.name">fixed-point@john.mcfarlane.name</a></p>
+                        <p style="font-size: 85%"><a href="https://johnmcfarlane.github.io/slides/2019-accu/">johnmcfarlane.github.io/slides/2019-accu</a></p>
+                    </div>
+                </section>
+            </div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: '../plugin/markdown/marked.js' },
+					{ src: '../plugin/markdown/markdown.js' },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,19 @@
+.implicit {
+    opacity: .35;
+}
+
+.imprecise {
+    color: orange;
+}
+
+.range_error_result {
+    font-size: 60% !important;
+}
+
+.witw {
+    visibility: hidden;
+}
+
+.significant {
+    background-color: #fff4;
+}
